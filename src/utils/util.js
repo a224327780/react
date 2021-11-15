@@ -15,9 +15,9 @@ export const bytesToSize = (bytes) => {
     return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 }
 
-export const checkOnline = (lastData) =>{
-    const a = new Date(lastData) - 1;
-    const b = new Date()
-    console.log([lastData, b, b - a])
-    return (b - a) > 400
+export const checkOnline = (lastData) => {
+    const a = Date.parse(lastData);
+    const b = new Date().getTime()
+    console.log([lastData, a, b, (b - a) / 1000 > 300])
+    return (b - a) / 1000 > 300
 }

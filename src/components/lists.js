@@ -3,12 +3,10 @@ import {useEffect, useState} from "react";
 import {bytesToSize, checkOnline, getProgressColor, progress} from "../utils/util";
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en.json'
+TimeAgo.addLocale(en)
 
 const Items = () => {
     const [items, setLists] = useState([]);
-    // const [timer, setTimer] = useState([]);
-
-    TimeAgo.addLocale(en)
     const timeAgo = new TimeAgo('en-US')
 
     useEffect(() => {
@@ -20,7 +18,7 @@ const Items = () => {
             setLists(postsResp['data']);
         };
         getLists();
-    })
+    }, [])
     return (
         <div className="grid grid-cols-3 gap-6">
             {items.map((item) => (
@@ -29,7 +27,7 @@ const Items = () => {
                     <Link to={`/${item._id}`}>
                         <div className="flex mb-2 ">
                             <div className="flex flex-auto items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 ${checkOnline(item.update_time) ? 'text-green-500' : 'text-red-500'}` }
+                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 ${!checkOnline(item.update_time) ? 'text-green-500' : 'text-red-500'}` }
                                      viewBox="0 0 20 20"
                                      fill="currentColor">
                                     <path fillRule="evenodd"

@@ -3,8 +3,7 @@ export const progress = (a, b) => {
     return c > 100 ? 100 : c;
 }
 
-export const getProgressColor = (a, b) => {
-    let v = progress(a, b)
+export const getProgressColor = (v) => {
     return (v >= 80 ? 'bg-red-500' : 'bg-blue-500') + ' text-xs text-white rounded h-4 flex items-center';
 }
 

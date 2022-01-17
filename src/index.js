@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import {SWRConfig} from "swr";
+import {fetcher} from "./utils/fetcher";
 import Lists from "./components/lists";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Layout from "./components/layout";
@@ -8,9 +10,9 @@ import Layout from "./components/layout";
 export default function App() {
     return (
         <Routes>
-            <Route path="/" element={<Layout />}>
-                <Route index element={<Lists />} />
-                <Route path="/:id" element={<Home />} />
+            <Route path="/" element={<Layout/>}>
+                <Route index element={<Lists/>}/>
+                <Route path="/:id" element={<Home/>}/>
             </Route>
         </Routes>
     );
@@ -23,9 +25,11 @@ function Home() {
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <SWRConfig value={{fetcher: fetcher}}>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+        </SWRConfig>
     </React.StrictMode>,
     document.getElementById('root')
 );
